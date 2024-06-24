@@ -1,0 +1,15 @@
+{
+  "name": "curso-cypress-pushing-it",
+  "version": "0.0.1",
+  "description": "Curso Cypress Pushing It",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run",
+    "start": "cypress open"
+  },
+  "author": "Rebeca Ordoñez",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.11.0"
+  }
+}

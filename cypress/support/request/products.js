@@ -8,18 +8,18 @@ Cypress.Commands.add('getProductById', (productID) => {
         }
     })
 })
- 
+
 Cypress.Commands.add('deleteProductById', (productID) => {
     cy.getProductById(productID).its('body.products.docs').each((product) => {
-    cy.request({
-        method: "DELETE",
-        url: `${Cypress.env().baseUrlAPI}/product/${product._id}`,
-        headers: {
-            Authorization: `Bearer ${Cypress.env().token}`,
-        }
+        cy.request({
+            method: "DELETE",
+            url: `${Cypress.env().baseUrlAPI}/product/${product._id}`,
+            headers: {
+                Authorization: `Bearer ${Cypress.env().token}`,
+            }
+        });
     });
-});
-})  
+})
 
 
 Cypress.Commands.add('createProduct', (product) => {

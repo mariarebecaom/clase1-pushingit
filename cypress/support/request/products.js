@@ -22,15 +22,27 @@ Cypress.Commands.add('deleteProductById', (productID) => {
 })
 
 
-Cypress.Commands.add('createProduct', (product) => {
+Cypress.Commands.add('createProduct', (product, product2) => {
     cy.request({
         method: "POST",
         url: `${Cypress.env().baseUrlAPI}/create-product`,
         failOnStatusCode: false,
-        body: product,
+        body: product, product2,
         headers: {
             Authorization: `Bearer ${Cypress.env().token}`,
         }
     })
 
+ })
+    Cypress.Commands.add('getProductByName', (productName) => {
+        cy.request({
+            method: "GET",
+            url: `${Cypress.env().baseUrlAPI}/products?name=${productName}`,
+            failOnStatusCode: false,
+            headers: {
+                Authorization: `Bearer ${Cypress.env().token}`
+            }
+       
+    })
+    
 })

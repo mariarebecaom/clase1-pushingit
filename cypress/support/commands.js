@@ -44,3 +44,4 @@ Cypress.Commands.add('login', (username, password) => {
 Cypress.Commands.add('getByDataCy', (selector) => {
     return cy.get(`[data-cy=${selector}]`);
 });
+

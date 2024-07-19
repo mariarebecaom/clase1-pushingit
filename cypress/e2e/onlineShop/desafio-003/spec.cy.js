@@ -12,7 +12,7 @@ describe(`${suiteName} ${suiteId} - ${module}`, () => {
 
     it('firstSqlTest', function () {
         cy.fixture(`${module}/${suiteName}-${suiteId}/${suiteId}.json`).then(function (data) {
-
+      
             data.product.id = suiteId;
             data.product2.id = data.product2.id
             cy.getProductByName(data.product.name).as('product1')
@@ -50,12 +50,29 @@ describe(`${suiteName} ${suiteId} - ${module}`, () => {
                 cy.getByDataCy('purchase').click()
                 cy.get('.chakra-modal__content-container').should('contain', 'Purchase has been completed successfully')
 
-                cy.task("connectDB", `SELECT a.product, a.price FROM public."purchaseProducts" a INNER JOIN public."sells" b ON a.id=b.id`).then(result => {
-                    cy.log(result)
+           
+                const joinQuery = `SELECT p.product, p.price, s."firstName", s."lastName", s."cardNumber" FROM public."purchaseProducts" p JOIN public."sells" s ON p.sell_id = s.id WHERE s.id = '52300'`;
 
-                })
-
-            })
-        })
-    })
-})
+                cy.task("connectDB", joinQuery).then(result => {
+                    cy.log(result);
+                    expect(result).to.deep.equal([
+                        {
+                            "product": "Remera KIIKII",
+                            "price": "1000.00",
+                            "firstName": "Rebeca",
+                            "lastName": "Ordonez",
+                            "cardNumber": "5525552555255525"
+                        },
+                        {
+                            "product": "Buzo Rojo",
+                            "price": "2000.00",
+                            "firstName": "Rebeca",
+                            "lastName": "Ordonez",
+                            "cardNumber": "5525552555255525"
+                        }
+                    ]);
+                });
+            });
+        });
+    });
+});

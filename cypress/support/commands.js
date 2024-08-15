@@ -24,6 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import '../support/request/products'
+import '../support/models/shoppingCart'
 
 Cypress.Commands.add('login', (username, password) => {
     cy.request({
@@ -44,4 +45,20 @@ Cypress.Commands.add('login', (username, password) => {
 Cypress.Commands.add('getByDataCy', (selector) => {
     return cy.get(`[data-cy=${selector}]`);
 });
+
+Cypress.Commands.add('loginSession', (data) => {
+   
+    cy.session('loginSession', () => {
+        cy.visit('https://pushing-it.vercel.app/');
+        cy.get('[data-cy="registertoggle"]').dblclick();
+        cy.get('[data-cy="user"]').type(Cypress.env().username);
+        cy.get('[data-cy="pass"]').type(Cypress.env().password);
+        cy.get('[data-cy="submitForm"]').click();
+        cy.url().should('include', '/home');
+        cy.get('[data-cy="onlineshoplink"]').click();
+        cy.url().should('include', '/home');
+    });
+})
+
+
 

@@ -7,20 +7,22 @@ module.exports = defineConfig({
       on("task", {
         async connectDB(query) {
           const client = new Client({
-            user: "pushingit",
-            password: "Qh2m8Mgc9f309bnieoUTZbgYsIL6rC6d",
-            host: "dpg-cq61ngbv2p9s73ce6jt0-a.oregon-postgres.render.com",
-            database: "pushingit_plmm",
-            ssl: true,
+            type: "postgres",
+            host: "dpg-cqpquu08fa8c73ela6k0-a.oregon-postgres.render.com",
             port: 5432,
+            user: "pushingit",
+            password: "giwr2L3OehdWeYdYb9nIMfJS2AcbJBno",
+            database: "pushingit_0mjd",
+            ssl: true,
           });
           await client.connect();
-          const res = await client.query(query)
-          await client.end()
-          return res.rows
-        }
-      })
+          const res = await client.query(query);
+          await client.end();
+          return res.rows;
+        },
+      });
     },
+    
     
     baseUrl: "https://pushing-it.vercel.app",
     watchForFileChanges: false,

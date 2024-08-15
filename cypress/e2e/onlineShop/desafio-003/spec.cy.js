@@ -51,7 +51,7 @@ describe(`${suiteName} ${suiteId} - ${module}`, () => {
                 cy.get('.chakra-modal__content-container').should('contain', 'Purchase has been completed successfully')
 
            
-                const joinQuery = `SELECT p.product, p.price, s."firstName", s."lastName", s."cardNumber" FROM public."purchaseProducts" p JOIN public."sells" s ON p.sell_id = s.id WHERE s.id = '52300'`;
+                const joinQuery = `SELECT p.product, p.price, s."firstName", s."lastName", s."cardNumber" FROM public."purchaseProducts" p JOIN public."sells" s ON p.sell_id = s.id WHERE s.id = '28249'`;
 
                 cy.task("connectDB", joinQuery).then(result => {
                     cy.log(result);
